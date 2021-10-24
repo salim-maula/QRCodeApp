@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         getPermission()
@@ -42,15 +42,19 @@ class MainActivity : AppCompatActivity() {
             reScan(binding)
         }
         binding.cardCopy.setOnClickListener {
-            copyQR()
+            copyQR(binding)
         }
         binding.cardShare.setOnClickListener {
-            shareQR()
+            shareQR(binding)
         }
     }
 
     private fun getPermission() {
+        //ContextCompat = merupakan sebuah open class
+        // checkSelfPermission=Tentukan apakah Anda telah diberikan izin tertentu.
         val permission = ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)
+        //PackageManager, merupakan sebuah abstract class
+        //abstract class->class tersebut tidak bisa dibuat sebagai object, hanya bisa diturunkan
         if (permission != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(
                 this, arrayOf(android.Manifest.permission.CAMERA),
@@ -75,6 +79,8 @@ class MainActivity : AppCompatActivity() {
             }
             errorCallback = ErrorCallback {
                 runOnUiThread {
+                    Toast.makeText(this@MainActivity, "Camera initialization error: ${it.message}",
+                        Toast.LENGTH_LONG).show()
                 }
             }
             binding.scanView.setOnClickListener {
@@ -87,7 +93,7 @@ class MainActivity : AppCompatActivity() {
         codeScanner.startPreview()
         binding.textQR.text = "scanning..."
     }
-    private fun copyQR() {
+    private fun copyQR(binding: ActivityMainBinding) {
         val clipBoard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         val clip: ClipData = ClipData.newPlainText("Simple text", binding.textQR.text)
         clipBoard.setPrimaryClip(clip)
@@ -98,11 +104,13 @@ class MainActivity : AppCompatActivity() {
         ).show()
     }
 
-    private fun shareQR() {
+    private fun shareQR(binding: ActivityMainBinding) {
         val sendIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND
             putExtra(Intent.EXTRA_TEXT, binding.textQR.text)
+            type = "text/plain"
         }
+
         val shareIntent = Intent.createChooser(sendIntent, null)
         startActivity(shareIntent)
     }

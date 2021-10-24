@@ -4,8 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/AndroidProject/QR Code_10_3_21/app/src/main/res/drawable-v24/bgnewstyle.xml" value="0.24322916666666666" />
+        <entry key="..\:/AndroidProject/QR Code_10_3_21/app/src/main/res/drawable-v24/bgstyle.xml" value="0.25729166666666664" />
         <entry key="..\:/AndroidProject/QR Code_10_3_21/app/src/main/res/drawable-v24/buttonbg.xml" value="0.171875" />
+        <entry key="..\:/AndroidProject/QR Code_10_3_21/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.25729166666666664" />
+        <entry key="..\:/AndroidProject/QR Code_10_3_21/app/src/main/res/drawable/ic_launcher_background.xml" value="0.25729166666666664" />
         <entry key="..\:/AndroidProject/QR Code_10_3_21/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/AndroidProject/QR Code_10_3_21/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1375" />
       </map>
     </option>
   </component>
